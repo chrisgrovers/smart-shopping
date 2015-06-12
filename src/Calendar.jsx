@@ -7,7 +7,6 @@ var CalendarComponent = require('react-widgets').Calendar
 var DayComponent = Eventful.createClass({
   render: function() {
     var dateClicked = window.dateClicked;
-
     var currentMonth = function() {
       var monthNoZero = parseInt(dateClicked.slice(0, dateClicked.indexOf('/')));
       var monthString;
@@ -20,7 +19,6 @@ var DayComponent = Eventful.createClass({
     };
     var currentYear = dateClicked.slice(-4);
     var currentDay = this.props.label;
-
     var dayRendering = currentMonth() + '-' + currentDay + '-' + currentYear;
 
     var events = window.events;
@@ -76,6 +74,7 @@ var Calendar = Eventful.createClass({
 
   render: function() {
     var props = {
+      events: this.props.events,
       dayComponent: DayComponent,
       defaultValue: new Date(),
       onChange: this.handleChange
