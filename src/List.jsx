@@ -7,12 +7,20 @@ var List = Eventful.createClass({
     e.preventDefault();
     var newItemName = e.target.newItemInput.value;
     e.target.newItemInput.value = '';
-
-    this.emit('add-item', { name: newItemName });
+    var loc = e.target.newLocInput.value;
+    this.emit('add-item', {name: newItemName, loc: loc});
   },
   renderListItem: function(itemData, id) {
+    var props = {
+      key: id,
+      index: id,
+      name: itemData.name,
+      mode: this.props.mode,
+      foodCategory: itemData.data.food_category,
+      sales: itemData.data.sales
+    }
     return (
-      <ListItem key={id} index={id} name={itemData.name} mode={this.props.mode} foodCategory={itemData.data.food_category}/>
+      <ListItem {...props} />
     );
   },
   render: function() {
@@ -30,6 +38,7 @@ var List = Eventful.createClass({
                   <div className='new-item-input'>
                     <form name="new-item-form" onSubmit={this.addItem}>
                       <input className='new-item-input' type="text" ref="newItemInput" name="newItemInput" placeholder="Enter an item"/>
+                      <input className='new-item-input' type="text" ref="newLocInput" name="newLocInput" placeholder="Berkeley, CA"/>
                       <input className='btn btn-sm btn-primary add-item-button' type="submit" value="Add Item"/>
                     </form>
                 </div>
