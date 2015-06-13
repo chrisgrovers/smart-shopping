@@ -31,6 +31,17 @@ var Day = Eventful.createClass({
         </div>
       );
     };
+    
+    if (this.props.suggestionsForDayClicked) {
+      for (var i = 0; i < this.props.suggestionsForDayClicked.length; i++) {
+        var loggedEvent = this.props.suggestionsForDayClicked[i].item.name
+        eventsToDisplay.push(
+          <div className="logged-message">            
+              You should pick up some {loggedEvent}
+          </div>
+        );
+      };
+    }
 
     return (
       <div>
@@ -40,6 +51,8 @@ var Day = Eventful.createClass({
     );
   }
 });
+
+
 
 module.exports = Day;
 
