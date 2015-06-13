@@ -20,29 +20,8 @@ var DayComponent = Eventful.createClass({
     var currentYear = dateClicked.slice(-4);
     var currentDay = this.props.label;
     var dayRendering = currentMonth() + '-' + currentDay + '-' + currentYear;
-
     var events = window.events;
-    var suggestions = {
-      "6-12-15":[
-        {
-          "item":{"id":"5575eb2ebfe0ce2a658a86b7",
-          "name":"milk", 
-          "elapsedDays":2}
-        }
-      ],
-      "6-16-2015":[
-        {
-          "item":{
-            "id":"5575eb2ebfe0ce2a658a86b7",
-            "name":"fish",
-            "elapsedDays":1
-          }
-        }
-      ]
-    };
-
-    console.log('in dayComponent, dayRendering: ', dayRendering);
-    console.log('in dayComponent, events: ', events);
+    var suggestions = window.suggestions;
     var idString = '';
 
     if (suggestions[dayRendering]) {
