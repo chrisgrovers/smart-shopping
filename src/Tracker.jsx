@@ -42,7 +42,6 @@ var Tracker = Eventful.createClass({
       var formattedDate = moment(dateInstance).format('L').split('/').join('-');
       var eventsForDayClicked = this.state.events[formattedDate];
       var suggestionsForDayClicked = window.suggestions[formattedDate];
-      console.log('suggestions for day clicked', suggestionsForDayClicked)
       this.setState({
         dateClicked: dateClicked,
         suggestionsForDayClicked: suggestionsForDayClicked,
