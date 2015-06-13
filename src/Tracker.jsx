@@ -27,7 +27,8 @@ var Tracker = Eventful.createClass({
       firebaseUrl: firebaseUrl,
       events: {},
       dateClicked: todaysDate,
-      eventsForDayClicked: {}
+      eventsForDayClicked: {},
+      suggestionsForDayClicked: {}
     };
   },
   componentDidMount: function() {
@@ -40,9 +41,11 @@ var Tracker = Eventful.createClass({
       var dateClicked = (dateInstance.getMonth() + 1).toString() + '/' + dateInstance.getDate().toString() + '/' + dateInstance.getFullYear().toString();
       var formattedDate = moment(dateInstance).format('L').split('/').join('-');
       var eventsForDayClicked = this.state.events[formattedDate];
-      
+      var suggestionsForDayClicked = window.suggestions[formattedDate];
+      console.log('suggestions for day clicked', suggestionsForDayClicked)
       this.setState({
         dateClicked: dateClicked,
+        suggestionsForDayClicked: suggestionsForDayClicked,
         eventsForDayClicked: eventsForDayClicked
       });
     });
@@ -241,6 +244,26 @@ var Tracker = Eventful.createClass({
   render: function() {
     window.dateClicked = this.state.dateClicked;
     window.events = this.state.events;
+    window.suggestions = {
+      "06-12-15":[
+        {
+          "item":{
+            "id":"5575eb2ebfe0ce2a658a86b7",
+            "name":"milk", 
+            "elapsedDays":2
+          }
+        }
+      ],
+      "06-16-2015":[
+        {
+          "item":{
+            "id":"5575eb2ebfe0ce2a658a86b7",
+            "name":"fish",
+            "elapsedDays":1
+          }
+        }
+      ]
+    };
     return (
       <div className="row" id="tracker">
         <h1>Shopping Tracker</h1>
@@ -249,7 +272,7 @@ var Tracker = Eventful.createClass({
           <Calendar dateClicked={this.state.dateClicked} />
         </div>
         <div className="col-md-6 single-day">
-          <Day dateClicked={this.state.dateClicked} eventsForDayClicked={this.state.eventsForDayClicked} />
+          <Day dateClicked={this.state.dateClicked} eventsForDayClicked={this.state.eventsForDayClicked} suggestionsForDayClicked={this.state.suggestionsForDayClicked} />
         </div>
       </div>
     );
